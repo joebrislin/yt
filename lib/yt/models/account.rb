@@ -84,7 +84,7 @@ module Yt
       # Tells `has_many :resumable_sessions` what params are set for the object
       # associated to the uploaded file.
       def upload_params
-        {part: 'snippet,status'}
+        {part: 'snippet,status,recordingDetails'}
       end
 
       # @private
@@ -98,6 +98,21 @@ module Yt
 
           status = params[:privacy_status]
           body[:status] = {privacyStatus: status} if status
+          
+          locationDesc = params[:location_description]
+          lat = params[:latitude]
+          lon = params[:longitude]
+          recordDate = params[:recording_date]
+          
+          details = {}
+          if(locationDesc || (lat && lon) || recordDate)
+             details[:locationDescription] = locationDesc if locationDesc
+             if(lat && lon)
+                details[:location] = {latitude: lat, longitude: lon} 
+             end
+             details[:recordingDate] = recordDate if recordDate
+          end
+          body[:recordingDetails] = details if details
         end
       end
 
