@@ -23,6 +23,11 @@ module Yt
       delegate :duration, :hd?, :stereoscopic?, :captioned?, :licensed?,
         to: :content_detail
 
+      # @!attribute [r] recording_detail
+      #   @return [Yt::Models::RecordingDetail] the video’s recording details.
+      has_one :recording_detail
+      delegate :location_description, :location, :recording_date, to: :recording_detail
+
       has_one :advertising_options_set
       delegate :ad_formats, to: :advertising_options_set
 
