@@ -15,8 +15,8 @@ module Yt
       # @return [String] if the resource is a video, the video’s description of location filmed.
       has_attribute :location_description, default: ''
 
-      # @return [String] if the resource is a video, the video’s description of location filmed.
-      has_attribute :location, default: ''
+      # @return [Hash] if the resource is a video, the video’s description of location filmed.
+      has_attribute :location, default: {}
 
       # @return [Time] if the resource is a video, the date and time that the video was recorded
       has_attribute :recording_date, type: Time
